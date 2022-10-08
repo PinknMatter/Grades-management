@@ -1,0 +1,37 @@
+body{ 
+    background-color: grey;
+    text-align: center;
+}
+
+.Title{
+    padding-top: 20vh;
+    font-size: 30px;
+}
+
+p{
+    font-size: 20px;
+}
+
+.wrapper{
+    height: 10vh;
+    width: 100%;
+}
+
+button{
+    
+    font-size: 20px;
+    border: 3px solid;
+    border-radius: 10px;
+    height: 40px;
+   
+    background-color: grey;
+    transition-duration: 1s;
+    text-decoration: none;
+}
+
+button:hover{
+    cursor:grab;
+    background-color: white;
+    
+    
+}

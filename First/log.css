@@ -1,3 +1,5 @@
+
+
 .topnav{
     position: relative;
     background-color: #0468BF;
@@ -13,7 +15,7 @@
     font-size: 30px;
     position: absolute;
     top: 50%;
-    left: 5%;
+    left: 6vw;
     transform: translate(-50%, -50%);
     font-family: highgate,sans-serif;
 
@@ -22,6 +24,9 @@
 
 .topnav a:hover{
     cursor:pointer;
+    
+       
+   
 }
 
 .topnav-centered a{
@@ -33,43 +38,88 @@
     transform: translate(-50%, -50%);
 }
 
+.main{
+    background-color: #04bf52;
+    height: 90%;
+    width: 100%;
+    float:right;
+    transition: 0.5s;
+}
 body{
     margin: 0;
+    padding:0;
 }
 
 .sidebar{
     color: #FFFFFF;
-    width: 15%;
-    display: none;
+    width: 18%;
+    display: flexbox;
     text-align: center;
-    height: 94vh;
+    height: 100%;
     background-color: #0477BF;
-   
+    position: fixed;
+    transition: 0.5s;
+    overflow: hidden;
 }
 
 .sidebar a {
-    color: #FFFFFF;
+    padding: 20px;
+    color: #ffff;
     text-decoration: none;
-    font-size: 25px;
-    
-   
+    font-size: 2vw;
+    transition: 0.5s;
+    display: block;
 }
 
+p{
+    font-size: 2vw;
+}
 
 button{
     font-size: 50px;
     text-decoration: none;
     border: none;
    background: none;
-    color: #0477BF;
+    color: #FFFFFF
 }
 .menu{
-    top: 50%;
+    top: 6%;
     position: absolute;
+   
     
 }
 
+.menub{
+    top: 0%;
+    left: 0%;
+    position: absolute;
+}
 .side_button{
     padding-top:100%;
     padding-left: 15vw;
+}
+.button{ 
+    display:block;
+    
+}
+
+.table,th,td{
+    border:1px solid black;
+    
+    background-color: #04bf52;
+    padding-left:px;
+
+
+}
+.table{
+
+    height: 100px;
+    width: 50px;
+}
+
+.Gradetable{
+    padding-left: 25%;
+   
+
+
 }

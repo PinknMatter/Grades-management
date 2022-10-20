@@ -5,6 +5,10 @@
     height: 6vh;
 }
 
+
+
+
+
 .topnav a {
     float: left;
     color: #FFFFFF;
@@ -12,6 +16,7 @@
     text-decoration: none;
     font-size: 30px;
     position: absolute;
+    display: li;
     top: 50%;
     left: 5%;
     transform: translate(-50%, -50%);
@@ -39,11 +44,13 @@ body{
 
 .sidebar{
     color: #FFFFFF;
-    width: 15%;
+    width: 10%;
     display: none;
     text-align: center;
     height: 94vh;
     background-color: #0477BF;
+    position: absolute;
+    transition: 1;
    
 }
 
@@ -55,14 +62,32 @@ body{
    
 }
 
+li{
+    list-style: none;
+    padding-top: 90px;
+}
 
-button{
-    font-size: 50px;
+
+.menub{
+   font-size: 50px;
     text-decoration: none;
     border: none;
-   background: none;
+    background: none;
     color: #0477BF;
+    display: block; 
 }
+
+.menuc{
+ margin-left: 100px;
+ font-size: 50px;
+ text-decoration: none;
+ border: none;
+ background: none;
+ color: #0477BF;
+ display: block;
+}
+
+
 .menu{
     top: 50%;
     position: absolute;
@@ -70,6 +95,25 @@ button{
 }
 
 .side_button{
-    padding-top:100%;
-    padding-left: 15vw;
+    padding-top:40%;
+    padding-left: 10vw;
+    position: absolute;
+    
+    
+}
+
+.main{
+    height: 90%;
+    width: auto;
+    background-color: yellowgreen;
+   
+}
+
+.buttonm{
+    position: absolute;
+    top: 50%;
+    left: 45%;
+    font-size: 20px;
+    border: none;
+   
 }

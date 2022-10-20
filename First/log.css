@@ -1,13 +1,11 @@
+
+
 .topnav{
     position: relative;
     background-color: #0468BF;
     overflow: hidden;
     height: 6vh;
 }
-
-
-
-
 
 .topnav a {
     float: left;
@@ -16,7 +14,6 @@
     text-decoration: none;
     font-size: 30px;
     position: absolute;
-    display: li;
     top: 50%;
     left: 5%;
     transform: translate(-50%, -50%);
@@ -27,6 +24,9 @@
 
 .topnav a:hover{
     cursor:pointer;
+    
+       
+   
 }
 
 .topnav-centered a{
@@ -38,82 +38,74 @@
     transform: translate(-50%, -50%);
 }
 
+
 body{
     margin: 0;
+    padding:0;
 }
 
 .sidebar{
     color: #FFFFFF;
-    width: 10%;
-    display: none;
+    width: 22%;
+    display: flexbox;
+    
     text-align: center;
     height: 94vh;
     background-color: #0477BF;
-    position: absolute;
-    transition: 1;
+   position: absolute;
+    
+    
+   
    
 }
 
 .sidebar a {
-    color: #FFFFFF;
+    padding: 20%;
+    color: #ffff;
     text-decoration: none;
     font-size: 25px;
-    
-   
-}
-
-li{
-    list-style: none;
-    padding-top: 90px;
 }
 
 
-.menub{
-   font-size: 50px;
+
+button{
+    font-size: 50px;
     text-decoration: none;
     border: none;
-    background: none;
+   background: none;
     color: #0477BF;
-    display: block; 
 }
-
-.menuc{
- margin-left: 100px;
- font-size: 50px;
- text-decoration: none;
- border: none;
- background: none;
- color: #0477BF;
- display: block;
-}
-
-
 .menu{
     top: 50%;
-    position: absolute;
+   
     
 }
 
 .side_button{
-    padding-top:40%;
-    padding-left: 10vw;
-    position: absolute;
-    
+    padding-top:100%;
+    padding-left: 15vw;
+}
+.button{ display:block;
     
 }
 
-.main{
-    height: 90%;
-    width: auto;
-    background-color: yellowgreen;
-   
+.table,th,td{
+    border:1px solid black;
+    
+    background-color: #04bf52;
+    padding-left:px;
+
+
+}
+.table{
+
+height: 100px;
+width: 50px;
 }
 
-.buttonm{
-    position: absolute;
-    top: 50%;
-    left: 45%;
-    font-size: 20px;
-    border: none;
+.Gradetable{
+    padding-left: 25%;
    
+
+
 }

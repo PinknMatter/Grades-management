@@ -23,7 +23,8 @@
     </div>
 
     <div class="sidebar" id="mySidebar">
-         <h1>Courses</h1>  
+         <p>Courses</p>  
+        
          <a href="#" class="button"> SEON 287</a>
          <a href="#" class="button"> COMP 249</a>
          <a href="#" class="button"> MATH 205</a>
@@ -31,15 +32,15 @@
          <a href="#" class="button"> GRADING/</br>STATISTICS</a>
          <a href="#" class="button"> OTHER SEMESTERS</a>
          
-         <button onclick="side_close()" class="side_button"></button>
+         <button class="menub" onclick="side_close()" class="side_button"><</button>
 
     </div>
 
-    <div class="menu" id="menu" onclick="">
+    <div class="menu" id="menu">
         <button onclick="side_open()">></button>
-    
+    </div>
+    <div class="main">
     <div class="Gradetable">
-    <div>
         <table>
             <tr>
               <th> GRADE</th>
@@ -75,6 +76,6 @@
 
           </table>
     </div>
-    </div>
+  </div>
 </body>
 </html>

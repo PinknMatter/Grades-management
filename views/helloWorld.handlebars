@@ -1,0 +1,12 @@
+<h1>Hello World: HomePage</h1>
+
+<ul>
+    {{#each messages}}
+    <li>{{this.id}} : {{this.text}}</li>
+    {{/each}}
+</ul>
+<form action="/message" method="post">
+    <label for="messageText">message</label>
+    <input type="text" id="messageText" name="messageText"/>
+    <button type="submit">send</button>
+</form>

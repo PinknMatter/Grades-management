@@ -1,0 +1,75 @@
+.topnav{
+    position: relative;
+    background-color: #0468BF;
+    overflow: hidden;
+    height: 6vh;
+}
+
+.topnav a {
+    float: left;
+    color: #FFFFFF;
+    text-align: center;
+    text-decoration: none;
+    font-size: 30px;
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    transform: translate(-50%, -50%);
+    font-family: highgate,sans-serif;
+
+    
+}
+
+.topnav a:hover{
+    cursor:pointer;
+}
+
+.topnav-centered a{
+    float: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-family: highgate,sans-serif;
+    transform: translate(-50%, -50%);
+}
+
+body{
+    margin: 0;
+}
+
+.sidebar{
+    color: #FFFFFF;
+    width: 15%;
+    display: none;
+    text-align: center;
+    height: 94vh;
+    background-color: #0477BF;
+   
+}
+
+.sidebar a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 25px;
+    
+   
+}
+
+
+button{
+    font-size: 50px;
+    text-decoration: none;
+    border: none;
+   background: none;
+    color: #0477BF;
+}
+.menu{
+    top: 50%;
+    position: absolute;
+    
+}
+
+.side_button{
+    padding-top:100%;
+    padding-left: 15vw;
+}

@@ -1,0 +1,28 @@
+{
+  "name": "grades-management",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon -r esm index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PinknMatter/Grades-management.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PinknMatter/Grades-management/issues"
+  },
+  "homepage": "https://github.com/PinknMatter/Grades-management#readme",
+  "dependencies": {
+    "esm": "^3.2.25",
+    "express": "^4.18.2",
+    "express-handlebars": "^6.0.6",
+    "nodemon": "^2.0.20",
+    "sqlite": "^4.1.2",
+    "sqlite3": "^5.1.2"
+  }
+}

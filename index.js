@@ -89,7 +89,7 @@ app.get('/log', async (req,res) => {
     res.render('log', {
         Courses,
         PageTitle: 'first',
-        //style: 'log.css',
+        style: 'log.css',
         js: 'log.js'
     })
 })
@@ -103,7 +103,7 @@ app.post('/course', async (req,res) => {
         Courses,
         Grades,
         PageTitle: 'first',
-        //style: 'log.css',
+        style: 'log.css',
         js: 'log.js'
     })
 })

@@ -5,7 +5,7 @@
             height: 6vh;
         }
 
-        .topnav a-button {
+        .topnav a {
             float: left;
             color: #FFFFFF;
             text-align: center;
@@ -20,7 +20,7 @@
             
         }
 
-        .topnav a-button:hover{
+        .topnav a:hover{
             cursor:pointer;
         }
 
@@ -37,18 +37,20 @@
 
         }
         
-        .topnav logout{
+        .topnav #logout{
             float: right;
-            color: #FFFFFF;
-            text-align: center;
             text-decoration: none;
-            font-size: 30px;
-            position: absolute;
+            position: relative;
             top: 50%;
-            left: 5%;
+  
             transform: translate(-50%, -50%);
             font-family: highgate,sans-serif;
         }
+        #logout-button{
+            color: #FFFFFF;
+            font-size:20px;
+        }
+
         body{
             margin: 0;
             padding:0;
@@ -65,7 +67,7 @@
         
         }
 
-        .sidebar a {
+        .sidebar #a-button {
             padding: 20%;
             color: #FFFFFF;
             text-decoration: none;

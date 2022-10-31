@@ -5,9 +5,11 @@
           <button type="text" id="home">Home</button>
         </form>
       </div>
-      <form action="/" method="post">
-            <button type="text" id="logout" >logout</button>
+      <div id="logout">
+      <form  action="/" method="post">
+            <button id="logout-button" type="text" >logout</button>
       </form>
+      </div>
       <a onclick="history.back()">Back</a>
 
 
@@ -17,7 +19,7 @@
         <h1>Courses</h1>
           <form action="/course" method="post">
           {{#each Courses}}
-            <button name="a-button" type="submit" class="button" value="{{this.name}}">{{this.name}}</button>
+            <button id="a-button" name="button" type="submit" class="button" value="{{this.name}}">{{this.name}}</button>
           {{/each}}
           </form>
         <button onclick="side_close()" class="side_button"><</button>

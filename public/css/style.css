@@ -1,4 +1,14 @@
 
+#errormsg{
+    color: red;
+    font-weight: bold;
+    font-family: highgate,sans-serif;
+    font-size: 4vw;
+    position: relative;
+    text-align: center;
+    width: 100vw;
+}
+
 body{ 
    background: #04091E;
 }
@@ -33,10 +43,10 @@ img{
     width: 20%;
     text-align: center;
     margin: auto;
-
-
+    display: flex;
 
 }
+
 
 .logbox{
     width: 340px;

@@ -1,13 +1,18 @@
      <div class="topnav">
 
       <div class="topnav-centered">
-        <form action="/log" method="post">
+        <form action="/logTeach" method="post">
           <button type="text" id="home">Home</button>
         </form>
       </div>
       <div id="logout">
       <form  action="/" method="post">
             <button id="logout-button" type="text" >logout</button>
+      </form>
+      </div>
+      <div id="editGrades">
+      <form  action="/gradesManagement" method="post">
+            <button id="editGrades-button" type="text" >Edit grades</button>
       </form>
       </div>
       <a onclick="history.back()">Back</a>
@@ -30,8 +35,8 @@
     <div class="menu" id="menu" onclick="">
         <button onclick="side_open()">></button>
     
-    </div>
 
+    </div>
     <div class="Gradetable">
     <div>
         <table>
@@ -40,7 +45,6 @@
               <th>GRADE 1</th>
               <th>GRADE 2</th>
               <th>GRADE 3</th>
-
               
             </tr>
             {{#each Grades}}
@@ -49,7 +53,6 @@
               <td>{{this.grade1}}</td>
               <td>{{this.grade2}}</td>
               <td>{{this.grade3}}</td>
-
             </tr>
             {{/each}}
           </table>

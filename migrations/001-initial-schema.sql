@@ -8,8 +8,10 @@ CREATE TABLE Messages(
 CREATE TABLE Users(
     u_id INTEGER PRIMARY KEY,
     username STRING,
-    password STRING
+    password STRING,
+    priv STRING DEFAULT 'student'
 );
+
 
 CREATE TABLE Courses(
     c_id INTEGER PRIMARY KEY,
@@ -20,6 +22,7 @@ CREATE TABLE Courses(
 CREATE TABLE Grades(
     u_id INTEGER,
     c_id INTEGER,
+    teacherName String,
     grade1 INTEGER,
     grade2 INTEGER,
     grade3 INTEGER,

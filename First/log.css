@@ -1,6 +1,4 @@
-
-
-.topnav{
+.topnav {
     position: relative;
     background-color: #0468BF;
     overflow: hidden;
@@ -17,40 +15,41 @@
     top: 50%;
     left: 6vw;
     transform: translate(-50%, -50%);
-    font-family: highgate,sans-serif;
+    font-family: highgate, sans-serif;
 
-    
+
 }
 
-.topnav a:hover{
-    cursor:pointer;
-    
-       
-   
+.topnav a:hover {
+    cursor: pointer;
+
+
+
 }
 
-.topnav-centered a{
+.topnav-centered a {
     float: none;
     position: absolute;
     top: 50%;
     left: 50%;
-    font-family: highgate,sans-serif;
+    font-family: highgate, sans-serif;
     transform: translate(-50%, -50%);
 }
 
-.main{
+.main {
     background-color: #04bf52;
     height: 90%;
     width: 100%;
-    float:right;
+    float: right;
     transition: 0.5s;
 }
-body{
+
+body {
     margin: 0;
-    padding:0;
+    padding: 0;
 }
 
-.sidebar{
+.sidebar {
     color: #FFFFFF;
     width: 18%;
     display: flexbox;
@@ -71,55 +70,64 @@ body{
     display: block;
 }
 
-p{
+p {
     font-size: 2vw;
 }
 
-button{
+button {
     font-size: 50px;
     text-decoration: none;
     border: none;
-   background: none;
+    background: none;
     color: #FFFFFF
 }
-.menu{
+
+.menu {
     top: 6%;
     position: absolute;
-   
-    
+
+
 }
 
-.menub{
+.menub {
     top: 0%;
     left: 0%;
     position: absolute;
 }
-.side_button{
-    padding-top:100%;
+
+.side_button {
+    padding-top: 100%;
     padding-left: 15vw;
 }
-.button{ 
-    display:block;
-    
-}
 
-.table,th,td{
-    border:1px solid black;
-    
-    background-color: #04bf52;
-    padding-left:px;
-
+.button {
+    display: block;
 
 }
-.table{
 
-    height: 100px;
-    width: 50px;
+
+
+td {
+    border: 1px solid black;
+    font-size: 100%;
+
+
 }
 
-.Gradetable{
+th {
+    font-size: 1vw;
+    height: 80px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 70%;
+
+}
+
+.Gradetable {
     padding-left: 25%;
-   
+
 
 
 }

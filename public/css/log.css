@@ -1,131 +1,165 @@
-        .topnav{
-            position: relative;
-            background-color: #0468BF;
-            overflow: hidden;
-            height: 6vh;
-        }
+.topnav {
+    position: relative;
+    background-color: #0468BF;
+    overflow: hidden;
+    height: 6vh;
+}
 
-        .topnav a {
-            float: left;
-            color: #FFFFFF;
-            text-align: center;
-            text-decoration: none;
-            font-size: 30px;
-            position: absolute;
-            top: 50%;
-            left: 5%;
-            transform: translate(-50%, -50%);
-            font-family: highgate,sans-serif;
-
-            
-        }
-
-        .topnav a:hover{
-            cursor:pointer;
-        }
-
-        .topnav-centered{
-            float: none;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            font-family: highgate,sans-serif;
-            transform: translate(-50%, -50%);
-        }
-        #home{
-            color: #FFFFFF;
-
-        }
-        
-        .topnav #logout{
-            float: right;
-            text-decoration: none;
-            position: relative;
-            top: 50%;
-  
-            transform: translate(-50%, -50%);
-            font-family: highgate,sans-serif;
-        }
-        #logout-button{
-            color: #FFFFFF;
-            font-size:20px;
-        }
-
-        .topnav #editGrades{
-            float: right;
-            text-decoration: none;
-            position: relative;
-            top: 50%;
-  
-            transform: translate(-50%, -50%);
-            font-family: highgate,sans-serif;
-        }
-        #editGrades-button{
-            color: #FFFFFF;
-            font-size:20px;
-        }
-
-        body{
-            margin: 0;
-            padding:0;
-        }
-
-        .sidebar{
-            color: #FFFFFF;
-            width: 15%;
-            display: none;
-            text-align: center;
-            height: 94vh;
-            background-color: #0477BF;
-            position: absolute;
-        
-        }
-
-        .sidebar #a-button {
-            padding: 20%;
-            color: #FFFFFF;
-            text-decoration: none;
-            font-size: 25px;
-            
-        
-        }
-
-
-        button{
-            font-size: 50px;
-            text-decoration: none;
-            border: none;
-            background: none;
-            color: #0477BF;
-        }
-         .button{ display:block;}
-        .menu{
-            top: 50%;
-            position: absolute;
-            
-        }
-
-        .side_button{
-            padding-top:100%;
-            padding-left: 15vw;
-        }
-        .table,th,td{
-    border:1px solid black;
-    
-    background-color: #04bf52;
-    padding-left:px;
+.topnav a {
+    float: left;
+    color: #FFFFFF;
+    text-align: center;
+    text-decoration: none;
+    font-size: 30px;
+    position: absolute;
+    top: 50%;
+    left: 6vw;
+    transform: translate(-50%, -50%);
+    font-family: highgate, sans-serif;
 
 
 }
-.table{
 
-height: 100px;
-width: 50px;
+#editGrades-button {
+    position: absolute;
+    left: 82%;
+    padding: 20px;
+    font-size: 20px;
+
 }
 
-.Gradetable{
+#editGrades-button:hover {
+    cursor: pointer;
+}
+
+#logout-button {
+    position: absolute;
+    left: 90%;
+    padding: 20px;
+    font-size: 20px;
+
+}
+
+#logout-button:hover {
+    cursor: pointer;
+}
+
+.topnav a:hover {
+    cursor: pointer;
+
+
+
+
+}
+
+#home {
+    position: absolute;
+    left: 50%;
+}
+
+.topnav-centered a {
+    float: none;
+    position: absolute;
+    font-size: 20px;
+    top: 50%;
+    left: 50%;
+    font-family: highgate, sans-serif;
+    transform: translate(-50%, -50%);
+}
+
+.main {
+    background-color: white;
+    height: 90%;
+    width: 100%;
+    float: right;
+    transition: 0.5s;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar {
+    color: #FFFFFF;
+    width: 18%;
+    display: flexbox;
+    text-align: center;
+    height: 100%;
+    background-color: #0477BF;
+    position: fixed;
+    transition: 0.5s;
+    overflow: hidden;
+}
+
+.sidebar a {
+    padding: 20px;
+    color: #ffff;
+    text-decoration: none;
+    font-size: 2vw;
+    transition: 0.5s;
+    display: block;
+}
+
+p {
+    font-size: 2vw;
+}
+
+button {
+    font-size: 50px;
+    text-decoration: none;
+    border: none;
+    background: none;
+    color: #FFFFFF
+}
+
+.menu {
+    top: 6%;
+    position: absolute;
+
+
+}
+
+.menub {
+    top: 0%;
+    left: 0%;
+    position: absolute;
+}
+
+.side_button {
+    padding-top: 100%;
+    padding-left: 15vw;
+}
+
+.button {
+    display: block;
+
+}
+
+
+
+td {
+    border: 1px solid black;
+    font-size: 100%;
+    text-align: center;
+
+
+}
+
+th {
+    font-size: 1vw;
+    height: 80px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 70%;
+
+}
+
+.Gradetable {
     padding-left: 25%;
-   
+
 
 
 }

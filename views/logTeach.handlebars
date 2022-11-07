@@ -1,60 +1,62 @@
-     <div class="topnav">
+<div class="topnav">
 
-      <div class="topnav-centered">
-        <form action="/logTeach" method="post">
-          <button type="text" id="home">Home</button>
-        </form>
-      </div>
-      <div id="logout">
-      <form  action="/" method="post">
-            <button id="logout-button" type="text" >logout</button>
+  <div class="topnav-centered">
+    <form action="/logTeach" method="post">
+      <button type="text" id="home">Home</button>
+    </form>
+  </div>
+  <div id="logout">
+    <form action="/" method="post">
+      <button id="logout-button" type="text">logout</button>
+    </form>
+  </div>
+  <div id="editGrades">
+    <form action="/gradesManagement" method="post">
+      <button id="editGrades-button" type="text">Edit grades</button>
+    </form>
+  </div>
+  <a onclick="history.back()">Back</a>
+
+
+</div>
+
+<div class="sidebar" id="mySidebar">
+  <button onclick="side_close()" class="side_button">
+    < </button>
+      <h1>Courses</h1>
+      <form action="/course" method="post">
+        {{#each Courses}}
+        <button id="a-button" name="button" type="submit" class="button" value="{{this.name}}">{{this.name}}</button>
+        {{/each}}
       </form>
-      </div>
-      <div id="editGrades">
-      <form  action="/gradesManagement" method="post">
-            <button id="editGrades-button" type="text" >Edit grades</button>
-      </form>
-      </div>
-      <a onclick="history.back()">Back</a>
 
 
-    </div>
 
-    <div class="sidebar" id="mySidebar">
-        <h1>Courses</h1>
-          <form action="/course" method="post">
-          {{#each Courses}}
-            <button id="a-button" name="button" type="submit" class="button" value="{{this.name}}">{{this.name}}</button>
-          {{/each}}
-          </form>
-        <button onclick="side_close()" class="side_button"><</button>
+</div>
+
+<div class="menu" id="menu" onclick="">
+  <button id="bclose" onclick="side_open()">></button>
 
 
-    </div>
+</div>
+<div class="Gradetable">
+  <div class="main">
+    <table>
+      <tr>
+        <th>STUDENT</th>
+        <th>GRADE 1</th>
+        <th>GRADE 2</th>
+        <th>GRADE 3</th>
 
-    <div class="menu" id="menu" onclick="">
-        <button onclick="side_open()">></button>
-    
-
-    </div>
-    <div class="Gradetable">
-    <div>
-        <table>
-            <tr>
-              <th>STUDENT</th>
-              <th>GRADE 1</th>
-              <th>GRADE 2</th>
-              <th>GRADE 3</th>
-              
-            </tr>
-            {{#each Grades}}
-            <tr>
-              <td>{{this.username}}</td>
-              <td>{{this.grade1}}</td>
-              <td>{{this.grade2}}</td>
-              <td>{{this.grade3}}</td>
-            </tr>
-            {{/each}}
-          </table>
-    </div>
-    </div>
+      </tr>
+      {{#each Grades}}
+      <tr>
+        <td>{{this.username}}</td>
+        <td>{{this.grade1}}</td>
+        <td>{{this.grade2}}</td>
+        <td>{{this.grade3}}</td>
+      </tr>
+      {{/each}}
+    </table>
+  </div>
+</div>

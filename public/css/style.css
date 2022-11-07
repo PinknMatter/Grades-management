@@ -1,44 +1,51 @@
-
-#errormsg{
+#errormsg {
+    top: 42vh;
     color: red;
     font-weight: bold;
-    font-family: highgate,sans-serif;
-    font-size: 4vw;
-    position: relative;
+    font-family: highgate, sans-serif;
+    font-size: 2vw;
+    position: absolute;
     text-align: center;
     width: 100vw;
 }
 
-body{ 
-   background: #04091E;
+body {
+    background: #04091E;
+    width: 98%;
+    height: 100%;
+}
+
+html {
+    width: 100%;
+    height: 100%;
 }
 
 
-.Title{
+.Title {
     padding-top: 10vh;
     font-size: 4vw;
-    font-family: highgate,sans-serif;
+    font-family: highgate, sans-serif;
     font-weight: 20;
     font-style: normal;
     text-align: center;
     color: #FFFFFF;
 }
 
-p{
+p {
     font-size: 20px;
 }
 
-img{
+img {
     position: absolute;
     z-index: -1;
-    width:  100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     opacity: 20%;
     overflow: hidden;
 }
 
 
-.wrapper{
+.wrapper {
     height: 8vh;
     width: 20%;
     text-align: center;
@@ -48,35 +55,40 @@ img{
 }
 
 
-.logbox{
+.logbox {
     width: 340px;
     height: 30px;
-    background-color:  #FFFFFF;
+    background-color: #FFFFFF;
     text-align: left;
     font-size: 20px;
-    font-family: highgate,sans-serif;
+    font-family: highgate, sans-serif;
     border: none;
-    
-    
+
+
 }
 
-button{
-    
+button {
+
     font-size: 20px;
     border: 0px solid;
     border-radius: 10px;
     height: 80px;
     width: 110px;
-   
+
+
     background-color: #0468BF;
     transition-duration: 1s;
     text-decoration: none;
     color: #FFFFFF;
 }
 
-button:hover{
-    cursor:grab;
+button:last-child {
+    margin-left: 6vw;
+}
+
+button:hover {
+    cursor: grab;
     background-color: #025298;
-    
-    
+
+
 }

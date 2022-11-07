@@ -90,15 +90,24 @@ body {
     position: fixed;
     transition: 0.5s;
     overflow: hidden;
+
 }
 
-.sidebar a {
+#a-button {
+    font-size: 3vw;
     padding: 20px;
-    color: #ffff;
-    text-decoration: none;
-    font-size: 2vw;
-    transition: 0.5s;
-    display: block;
+
+}
+
+form {
+    width: 100%;
+    height: 70%;
+}
+
+
+
+form {
+    text-align: center;
 }
 
 p {
@@ -113,9 +122,15 @@ button {
     color: #FFFFFF
 }
 
+#bclose {
+    color: #0468BF;
+}
+
 .menu {
     top: 6%;
     position: absolute;
+    display: none;
+
 
 
 }
@@ -127,8 +142,9 @@ button {
 }
 
 .side_button {
-    padding-top: 100%;
-    padding-left: 15vw;
+    right: 5%;
+
+    position: absolute;
 }
 
 .button {

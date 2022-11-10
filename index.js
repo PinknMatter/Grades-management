@@ -97,12 +97,9 @@ app.post('/course',cookieVal, async (req,res) => {
     const priv  = await db.get('SELECT (priv) FROM Users WHERE (? = username);',req.cookies.user)
     const course = req.body;
     const Courses = await db.all('SELECT DISTINCT name FROM Grades INNER JOIN Users INNER JOIN Courses WHERE Users.u_id = Grades.u_id AND Courses.c_id = Grades.c_id AND username = ?;',req.cookies.user)
-    var avg = await db.all("SELECT ((grade1 + grade2 + grade3)/3) AS avg FROM Users INNER JOIN Grades INNER JOIN Courses WHERE Users.u_id = Grades.u_id AND Courses.c_id = Grades.c_id AND name = ? AND priv ='student';",Object.values(course).toString())
-    console.log(avg)
     if(priv.priv == 'student'){
-        var Grades = await db.all("SELECT * FROM Users INNER JOIN Grades INNER JOIN Courses WHERE Users.u_id = Grades.u_id AND Courses.c_id = Grades.c_id AND name = ? AND username = ?;",Object.values(course).toString(),req.cookies.user)
+        var Grades = await db.all("SELECT *,((grade1 + grade2 + grade3)/3) AS avg FROM Users INNER JOIN Grades INNER JOIN Courses WHERE Users.u_id = Grades.u_id AND Courses.c_id = Grades.c_id AND name = ? AND username = ?;",Object.values(course).toString(),req.cookies.user)
         res.render('log', {
-            avg,
             Courses,
             Grades,
             PageTitle: 'first',
@@ -111,7 +108,7 @@ app.post('/course',cookieVal, async (req,res) => {
         })
     }
     else{
-        var Grades = await db.all("SELECT * FROM Users INNER JOIN Grades INNER JOIN Courses WHERE Users.u_id = Grades.u_id AND Courses.c_id = Grades.c_id AND name = ? AND teacherName = ?;",Object.values(course).toString(),req.cookies.user)
+        var Grades = await db.all("SELECT *,((grade1 + grade2 + grade3)/3) AS avg FROM Users INNER JOIN Grades INNER JOIN Courses WHERE Users.u_id = Grades.u_id AND Courses.c_id = Grades.c_id AND name = ? AND teacherName = ?;",Object.values(course).toString(),req.cookies.user)
         res.render('logTeach', {
             Courses,
             Grades,

@@ -97,10 +97,12 @@ app.post('/course',cookieVal, async (req,res) => {
     const priv  = await db.get('SELECT (priv) FROM Users WHERE (? = username);',req.cookies.user)
     const course = req.body;
     const Courses = await db.all('SELECT DISTINCT name FROM Grades INNER JOIN Users INNER JOIN Courses WHERE Users.u_id = Grades.u_id AND Courses.c_id = Grades.c_id AND username = ?;',req.cookies.user)
-
+    var avg = await db.all("SELECT ((grade1 + grade2 + grade3)/3) AS avg FROM Users INNER JOIN Grades INNER JOIN Courses WHERE Users.u_id = Grades.u_id AND Courses.c_id = Grades.c_id AND name = ? AND priv ='student';",Object.values(course).toString())
+    console.log(avg)
     if(priv.priv == 'student'){
         var Grades = await db.all("SELECT * FROM Users INNER JOIN Grades INNER JOIN Courses WHERE Users.u_id = Grades.u_id AND Courses.c_id = Grades.c_id AND name = ? AND username = ?;",Object.values(course).toString(),req.cookies.user)
         res.render('log', {
+            avg,
             Courses,
             Grades,
             PageTitle: 'first',
@@ -180,6 +182,56 @@ app.get('/Time', (req,res) => {
     res.send("Local time: " + (new Date()).toLocaleTimeString())
 })
 */
+
+   //=============
+//Graph begin
+
+app.get("/", function(req,res){
+    res.sendFile(__dirname + "/chart.png");
+  
+ });
+
+
+var lcs = require('line-chart-simple');
+
+
+
+var xvalues = ["A","B","C","D","E","F","G","H","I","J","K"]; //list of x cordinate student names
+var project_test = xvalues.map(function(x){return Math.random()*100;}); // Test/project average values
+var midterm = xvalues.map(function(x){return Math.random()*100;}); // mid term exam
+var final_exam = xvalues.map(function(x){return Math.random()*100;}); // Final term final exam
+var final_total = xvalues.map(function(x){return Math.random()*100;}); // Total average
+
+
+var classPerfomance = {
+    Project_Average: project_test,
+    Mid_term: midterm,
+    Final_Exam: final_exam,
+    Total_average: final_total,
+
+}
+
+
+// colours for topics
+classPerfomance.Project_Average.color='rgb(255, 0, 0)';
+classPerfomance.Mid_term.color='rgb(0, 225, 0)';
+classPerfomance.Final_Exam.color='rgb(0, 0, 255)';
+classPerfomance.Total_average.color='rgb(0, 0, 0)';
+
+var dots = { //put colored dots at specified indices
+    'rgb(255, 0, 0)': [1,2,3],
+    'rgb(0, 0, 255)': [4,5,6],
+    'rgb(0, 255, 0)': [7,8,9],
+    
+};
+
+var width = 1000;
+var height = 800;
+var bgColor = 'white';
+lcs.plotSimpleChart("chart.png", xvalues, classPerfomance ,dots, width  , height, bgColor);
+
+// Graph ends
+//==============
 
 const setup = async() => {
     const db = await dbPromise

@@ -13,7 +13,7 @@
     font-size: 30px;
     position: absolute;
     top: 50%;
-    left: 6vw;
+    left: 2vw;
     transform: translate(-50%, -50%);
     font-family: highgate, sans-serif;
 
@@ -22,9 +22,9 @@
 
 #editGrades-button {
     position: absolute;
-    left: 82%;
-    padding: 20px;
-    font-size: 20px;
+    left: 83%;
+    top: 20%;
+    font-size: 30px;
 
 }
 
@@ -34,9 +34,9 @@
 
 #logout-button {
     position: absolute;
-    left: 90%;
-    padding: 20px;
-    font-size: 20px;
+    left: 94%;
+    top: 20%;
+    font-size: 30px;
 
 }
 
@@ -54,15 +54,14 @@
 
 #home {
     position: absolute;
-    left: 50%;
+    left: 45%;
 }
 
 .topnav-centered a {
     float: none;
     position: absolute;
     font-size: 20px;
-    top: 50%;
-    left: 50%;
+
     font-family: highgate, sans-serif;
     transform: translate(-50%, -50%);
 }
@@ -83,13 +82,14 @@ body {
 .sidebar {
     color: #FFFFFF;
     width: 18%;
-    display: flexbox;
+    display: block;
     text-align: center;
     height: 100%;
     background-color: #0477BF;
     position: fixed;
     transition: 0.5s;
     overflow: hidden;
+    left: 0;
 
 }
 
@@ -158,23 +158,45 @@ td {
     border: 1px solid black;
     font-size: 100%;
     text-align: center;
+    border: solid rgba(0, 0, 0) 1px;
 
+    height: 30px;
 
+}
+
+tr:nth-child(odd) {
+    background-color: #0477bf71;
+}
+
+tr:nth-child(even) {
+    background-color: #699ec27a;
 }
 
 th {
+
     font-size: 1vw;
     height: 80px;
+    border: solid rgba(0, 0, 0) 1px;
+
+
 }
+
+
 
 table {
     border-collapse: collapse;
     width: 70%;
 
+
+
+
 }
 
 .Gradetable {
-    padding-left: 25%;
+    padding-left: 23%;
+    padding-top: 60px;
+    display: block;
+
 
 
 

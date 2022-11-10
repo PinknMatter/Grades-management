@@ -11,3 +11,6 @@ function side_open() {
     document.getElementsByClassName("main")[0].style.width = "85%";
 
 }
+
+let average = this.grade1 + this.grade2
+console.log(average);

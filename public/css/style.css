@@ -6,18 +6,18 @@
     font-size: 2vw;
     position: absolute;
     text-align: center;
-    width: 98vw;
+    width: 100vw;
 }
 
 body {
     background: #04091E;
     width: 98%;
-    height: 98%;
+    height: 100%;
 }
 
 html {
-    width: 98%;
-    height: 98%;
+    width: 100%;
+    height: 100%;
 }
 
 
@@ -38,8 +38,8 @@ p {
 img {
     position: absolute;
     z-index: -1;
-    width: 99%;
-    height: 99%;
+    width: 100%;
+    height: 100%;
     opacity: 20%;
     overflow: hidden;
 }

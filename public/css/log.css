@@ -4,7 +4,6 @@
     overflow: hidden;
     height: 6vh;
 }
-
 .topnav a {
     float: left;
     color: #FFFFFF;
@@ -16,47 +15,23 @@
     left: 2vw;
     transform: translate(-50%, -50%);
     font-family: highgate, sans-serif;
-
-
 }
-
-#editGrades-button {
-    position: absolute;
-    left: 83%;
-    top: 20%;
-    font-size: 30px;
-
-}
-
-#editGrades-button:hover {
-    cursor: pointer;
-}
-
 #logout-button {
     position: absolute;
     left: 94%;
     top: 20%;
     font-size: 30px;
-
 }
-
 #logout-button:hover {
     cursor: pointer;
 }
-
 .topnav a:hover {
     cursor: pointer;
-
-
-
-
 }
-
 #home {
     position: absolute;
     left: 45%;
 }
-
 .topnav-centered a {
     float: none;
     position: absolute;
@@ -65,7 +40,6 @@
     font-family: highgate, sans-serif;
     transform: translate(-50%, -50%);
 }
-
 .main {
     background-color: white;
     height: 90%;
@@ -73,12 +47,10 @@
     float: right;
     transition: 0.5s;
 }
-
 body {
     margin: 0;
     padding: 0;
 }
-
 .sidebar {
     color: #FFFFFF;
     width: 18%;
@@ -92,28 +64,21 @@ body {
     left: 0;
 
 }
-
 #a-button {
     font-size: 3vw;
     padding: 20px;
 
 }
-
 form {
     width: 100%;
     height: 70%;
 }
-
-
-
 form {
     text-align: center;
 }
-
 p {
     font-size: 2vw;
 }
-
 button {
     font-size: 50px;
     text-decoration: none;
@@ -121,11 +86,9 @@ button {
     background: none;
     color: #FFFFFF
 }
-
 #bclose {
     color: #0468BF;
 }
-
 .menu {
     top: 6%;
     position: absolute;
@@ -134,70 +97,60 @@ button {
 
 
 }
-
 .menub {
     top: 0%;
     left: 0%;
     position: absolute;
 }
-
 .side_button {
     right: 5%;
 
     position: absolute;
 }
-
 .button {
     display: block;
 
 }
-
-
-
 td {
     border: 1px solid black;
     font-size: 100%;
     text-align: center;
     border: solid rgba(0, 0, 0) 1px;
-
     height: 30px;
-
 }
-
 tr:nth-child(odd) {
     background-color: #0477bf71;
 }
-
 tr:nth-child(even) {
     background-color: #699ec27a;
 }
-
 th {
 
     font-size: 1vw;
     height: 80px;
     border: solid rgba(0, 0, 0) 1px;
-
-
 }
-
-
-
 table {
     border-collapse: collapse;
     width: 70%;
-
-
-
-
 }
-
 .Gradetable {
     padding-left: 23%;
     padding-top: 60px;
     display: block;
-
-
-
-
+}
+.EditOptions {
+    padding-top: 30px;
+    left: 23%;
+    display: block;
+}
+#editGrades-button {
+    color: #000000;
+    /* position: relative; */
+    display: inline;
+    font-size: 24px;
+    text-align: right;
+}
+#editGrades-button:hover {
+    cursor: pointer;
 }

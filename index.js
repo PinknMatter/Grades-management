@@ -128,6 +128,25 @@ app.post('/log', (req,res) => {
 app.post('/logTeach', (req,res) => {
     res.redirect('logTeach')
 })
+
+//route to gradesManagement for when teacher is logged in
+app.post('/editGrades', (req,res) => {
+    // TODO
+})
+//route to removeStudent for when teacher is logged in
+app.post('/removeStudent',cookieVal, async (req,res) => {
+    const db = await dbPromise
+    let keys = Object.keys(req.body);
+    let keys2 = Object.keys(req.body[keys[0]])
+    const values = req.body[keys[0]]
+    const u_id = values[keys2[0]]
+    const c_id = values[keys2[1]]
+    console.log(u_id)
+    console.log(c_id)
+    db.run('DELETE FROM GRADES where u_id= ? AND c_id = ?', u_id, c_id)
+    // TODO refresh the course page with the student removed
+})
+
 //simply check current user and priv with cookies
 function cookieVal(req,res,next){
     const { cookies } = req

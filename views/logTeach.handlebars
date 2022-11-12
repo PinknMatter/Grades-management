@@ -10,14 +10,12 @@
       <button id="logout-button" type="text">logout</button>
     </form>
   </div>
-  <div id="editGrades">
+  {{!-- <div id="editGrades">
     <form action="/gradesManagement" method="post">
       <button id="editGrades-button" type="text">Edit grades</button>
     </form>
-  </div>
+  </div> --}}
   <a onclick="history.back()">Back</a>
-
-
 </div>
 
 <div class="sidebar" id="mySidebar">
@@ -28,15 +26,18 @@
         <button id="a-button" name="button" type="submit" class="button" value="{{this.name}}">{{this.name}}</button>
         {{/each}}
       </form>
-
-
-
 </div>
 
 <div class="menu" id="menu" onclick="">
   <button id="bclose" onclick="side_open()">></button>
-
-
+</div>
+<div class="EditOptions">
+  <form action="/gradesManagement" method="post">
+    <button id="editGrades-button" type="text">Add Student</button>
+  </form>
+  <form action="/gradesManagement" method="post">
+    <button id="editGrades-button" type="text">Add Assignment</button>
+  </form>
 </div>
 <div class="Gradetable">
   <div class="main">
@@ -50,11 +51,21 @@
       </tr>
       {{#each Grades}}
       <tr>
-        <td>{{this.username}}</td>
-        <td>{{this.grade1}}</td>
-        <td>{{this.grade2}}</td>
-        <td>{{this.grade3}}</td>
-        <td>{{this.avg}}</td>
+        <td>{{username}}</td>
+        <td>{{grade1}}</td>
+        <td>{{grade2}}</td>
+        <td>{{grade3}}</td>
+        <td>{{avg}}</td>
+        <td><form action="/editGrades#{{this.u_id}}" method="post">
+              <button id="editGrades" value="{{this.u_id}}">Edit</button>
+            </form>
+        </td>
+        <td>
+          <form action="/removeStudent" method="post">
+              <button id="removeStudent" name="removeButton[u_id]" type="submit" value="{{u_id}}">Remove Student</button>
+              <input name="removeButton[c_id]" type="hidden" value="{{c_id}}"</input>
+          </form>
+        </td>
       </tr>
       {{/each}}
     </table>

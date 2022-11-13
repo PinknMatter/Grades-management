@@ -1,20 +1,15 @@
 <div class="topnav">
-
   <div class="topnav-centered">
     <form action="/logTeach" method="post">
       <button type="text" id="home">Home</button>
     </form>
   </div>
+
   <div id="logout">
     <form action="/" method="post">
-      <button id="logout-button" type="text">logout</button>
+      <button id="logout-button" type="text">Logout</button>
     </form>
   </div>
-  {{!-- <div id="editGrades">
-    <form action="/gradesManagement" method="post">
-      <button id="editGrades-button" type="text">Edit grades</button>
-    </form>
-  </div> --}}
   <a onclick="history.back()">Back</a>
 </div>
 
@@ -23,7 +18,7 @@
       <h1>Courses</h1>
       <form action="/course" method="post">
         {{#each Courses}}
-        <button id="a-button" name="button" type="submit" class="button" value="{{this.name}}">{{this.name}}</button>
+        <button id="a-button" name="button" type="submit" class="button" value="{{name}}">{{name}}</button>
         {{/each}}
       </form>
 </div>
@@ -56,14 +51,15 @@
         <td>{{grade2}}</td>
         <td>{{grade3}}</td>
         <td>{{avg}}</td>
-        <td><form action="/editGrades#{{this.u_id}}" method="post">
-              <button id="editGrades" value="{{this.u_id}}">Edit</button>
+        <td><form action="/editGrades" method="post">
+              <button id="editGrades" value="{{u_id}}">Edit</button>
+              <input name = "editGrades" type="hidden" value=""</input>
             </form>
         </td>
         <td>
           <form action="/removeStudent" method="post">
-              <button id="removeStudent" name="removeButton[u_id]" type="submit" value="{{u_id}}">Remove Student</button>
-              <input name="removeButton[c_id]" type="hidden" value="{{c_id}}"</input>
+              <button id="removeStudent" name="u_id" type="submit" value="{{u_id}}">Remove Student</button>
+              <input name="c_id" type="hidden" value="{{c_id}}"</input>
           </form>
         </td>
       </tr>

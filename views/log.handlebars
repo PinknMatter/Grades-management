@@ -1,38 +1,30 @@
 <div class="topnav">
-
   <div class="topnav-centered">
     <form action="/log" method="post">
       <button type="text" id="home">Home</button>
     </form>
   </div>
+
   <div id="logout">
     <form action="/" method="post">
-      <button id="logout-button" type="text">logout</button>
+      <button id="logout-button" type="text">Logout</button>
     </form>
   </div>
   <a onclick="history.back()">Back</a>
-
-
 </div>
 
 <div class="sidebar" id="mySidebar">
-  <button onclick="side_close()" class="side_button">
-    < </button>
+  <button onclick="side_close()" class="side_button"> < </button>
       <h1>Courses</h1>
-
       <form action="/course" method="post">
         {{#each Courses}}
-        <button id="a-button" name="button" type="submit" class="button" value="{{this.name}}">{{this.name}}</button>
+        <button id="a-button" name="button" type="submit" class="button" value="{{name}}">{{name}}</button>
         {{/each}}
       </form>
-
-
-
 </div>
 
 <div class="menu" id="menu" onclick="">
   <button id="bclose" onclick="side_open()">></button>
-
 </div>
 
 <div class="Gradetable">
@@ -49,11 +41,11 @@
       </tr>
       {{#each Grades}}
       <tr>
-        <td>{{this.username}}</td>
-        <td>{{this.grade1}}</td>
-        <td>{{this.grade2}}</td>
-        <td>{{this.grade3}}</td>
-        <td>{{this.avg}}</td>
+        <td>{{username}}</td>
+        <td>{{grade1}}</td>
+        <td>{{grade2}}</td>
+        <td>{{grade3}}</td>
+        <td>{{avg}}</td>
 
       </tr>
       {{/each}}

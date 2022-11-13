@@ -24,13 +24,13 @@ app.use(cookieParser())
 /*render login and redirect to login*/ 
 app.get('/home', async (req,res) =>{
     res.render('home',{
-        PageTitle: 'home',
+        PageTitle: 'Home - Management++',
         style: 'style.css'})
 })
 /*render login to clear cookies*/
 app.get('/', async (req,res) =>{
     res.render('home',{
-        PageTitle: 'home',
+        PageTitle: 'Home - Management++',
         style: 'style.css'})
 })
 
@@ -96,28 +96,59 @@ app.post('/course',cookieVal, async (req,res) => {
     const db = await dbPromise
     const priv  = await db.get('SELECT (priv) FROM Users WHERE (? = username);',req.cookies.user)
     const course = req.body;
+    console.log(course)
     const Courses = await db.all('SELECT DISTINCT name FROM Grades INNER JOIN Users INNER JOIN Courses WHERE Users.u_id = Grades.u_id AND Courses.c_id = Grades.c_id AND username = ?;',req.cookies.user)
-    if(priv.priv == 'student'){
-        var Grades = await db.all("SELECT *,((grade1 + grade2 + grade3)/3) AS avg FROM Users INNER JOIN Grades INNER JOIN Courses WHERE Users.u_id = Grades.u_id AND Courses.c_id = Grades.c_id AND name = ? AND username = ?;",Object.values(course).toString(),req.cookies.user)
-        res.render('log', {
+    if(priv.priv == 'teacher'){
+        var Grades = await db.all("SELECT *,((grade1 + grade2 + grade3)/3) AS avg FROM Users INNER JOIN Grades INNER JOIN Courses WHERE Users.u_id = Grades.u_id AND Courses.c_id = Grades.c_id AND name = ? AND teacherName = ?;",Object.values(course).toString(),req.cookies.user)
+        res.render('logTeach', {
             Courses,
             Grades,
-            PageTitle: 'first',
+            PageTitle: Object.values(course).toString() + ' - Management++',
             style: 'log.css',
             js: 'log.js'
         })
     }
     else{
-        var Grades = await db.all("SELECT *,((grade1 + grade2 + grade3)/3) AS avg FROM Users INNER JOIN Grades INNER JOIN Courses WHERE Users.u_id = Grades.u_id AND Courses.c_id = Grades.c_id AND name = ? AND teacherName = ?;",Object.values(course).toString(),req.cookies.user)
-        res.render('logTeach', {
+        var Grades = await db.all("SELECT *,((grade1 + grade2 + grade3)/3) AS avg FROM Users INNER JOIN Grades INNER JOIN Courses WHERE Users.u_id = Grades.u_id AND Courses.c_id = Grades.c_id AND name = ? AND username = ?;",Object.values(course).toString(),req.cookies.user)
+        res.render('log', {
             Courses,
             Grades,
-            PageTitle: 'first',
+            PageTitle: Object.values(course).toString() + ' - Management++',
             style: 'log.css',
             js: 'log.js'
         })
     }
 })
+
+// Useless for now Keven doing tests
+// app.get('/course', cookieVal, async (req,res) => {
+//     const db = await dbPromise
+//     const priv  = await db.get('SELECT (priv) FROM Users WHERE (? = username);',req.cookies.user)
+//     // const course = req.body;
+//     const course = "SOEN 287"
+//     const Courses = await db.all('SELECT DISTINCT name FROM Grades INNER JOIN Users INNER JOIN Courses WHERE Users.u_id = Grades.u_id AND Courses.c_id = Grades.c_id AND username = ?;',req.cookies.user)
+//     // if(priv.priv == 'student'){
+//     //     var Grades = await db.all("SELECT *,((grade1 + grade2 + grade3)/3) AS avg FROM Users INNER JOIN Grades INNER JOIN Courses WHERE Users.u_id = Grades.u_id AND Courses.c_id = Grades.c_id AND name = ? AND username = ?;",Object.values(course).toString(),req.cookies.user)
+//     //     res.render('log', {
+//     //         Courses,
+//     //         Grades,
+//     //         PageTitle: Object.values(course).toString() + ' - Management++',
+//     //         style: 'log.css',
+//     //         js: 'log.js'
+//     //     })
+//     // }
+//     // else{
+//         var Grades = await db.all("SELECT *,((grade1 + grade2 + grade3)/3) AS avg FROM Users INNER JOIN Grades INNER JOIN Courses WHERE Users.u_id = Grades.u_id AND Courses.c_id = Grades.c_id AND name = ? AND teacherName = ?;",Object.values(course).toString(),req.cookies.user)
+//         res.render('logTeach', {
+//             Courses,
+//             Grades,
+//             PageTitle: Object.values(course).toString() + ' - Management++',
+//             style: 'log.css',
+//             js: 'log.js'
+//         })
+//         console.log('bob' + course)
+//     // }
+// })
 
 //route to log for home button
 app.post('/log', (req,res) => {
@@ -141,8 +172,6 @@ app.post('/removeStudent',cookieVal, async (req,res) => {
     const values = req.body[keys[0]]
     const u_id = values[keys2[0]]
     const c_id = values[keys2[1]]
-    console.log(u_id)
-    console.log(c_id)
     db.run('DELETE FROM GRADES where u_id= ? AND c_id = ?', u_id, c_id)
     // TODO refresh the course page with the student removed
 })
@@ -160,7 +189,7 @@ app.get('/logTeach',cookieVal, async (req,res) => {
     const Courses = await db.all('SELECT name FROM Grades INNER JOIN Users INNER JOIN Courses  WHERE Users.u_id = Grades.u_id AND Courses.c_id = Grades.c_id AND username = ?;',req.cookies.user)
     res.render('logTeach', {
         Courses,
-        PageTitle: 'first',
+        PageTitle: 'Teacher Portal - Management++',
         style: 'log.css',
         js: 'log.js'
     })
@@ -172,36 +201,13 @@ app.get('/log',cookieVal, async (req,res) => {
     const Courses = await db.all('SELECT name FROM Grades INNER JOIN Users INNER JOIN Courses  WHERE Users.u_id = Grades.u_id AND Courses.c_id = Grades.c_id AND username = ?;',req.cookies.user)
     res.render('log', {
         Courses,
-        PageTitle: 'first',
+        PageTitle: 'Student Portal - Management++',
         style: 'log.css',
         js: 'log.js'
     })
 })
 
-/*
-//render helloWorld and save messages in db and display messages
-app.post ('/helloWorld',async (req,res) => {
-    const db = await dbPromise
-    const messageText = req.body.messageText
-    await db.run("INSERT INTO Messages (text) VALUES (?);", messageText)
-    res.redirect('helloWorld')
-})
-
-app.get('/helloWorld', async (req,res) => {
-    const db =  await dbPromise;
-    const messages = await db.all('SELECT * FROM Messages;')
-    res.render('helloWorld', {messages})
-})
-
-//get the current time
-app.get('/Time', (req,res) => {
-    res.send("Local time: " + (new Date()).toLocaleTimeString())
-})
-*/
-
-   //=============
 //Graph begin
-
 app.get("/", function(req,res){
     res.sendFile(__dirname + "/chart.png");
   
@@ -248,7 +254,6 @@ lcs.plotSimpleChart("chart.png", xvalues, classPerfomance ,dots, width  , height
 
 // Graph ends
 //==============
-
 const setup = async() => {
     const db = await dbPromise
     await db.migrate()
@@ -257,5 +262,4 @@ const setup = async() => {
         console.log("listening on port:8000")
     })
 }
-
 setup()

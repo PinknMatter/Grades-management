@@ -38,6 +38,7 @@ app.get('/', async (req,res) =>{
 app.post('/', (req,res) => {
     res.clearCookie('priv')
     res.clearCookie('user')
+    res.clearCookie('course')
     res.redirect('/')
 })
 
@@ -96,7 +97,7 @@ app.post('/course',cookieVal, async (req,res) => {
     const db = await dbPromise
     const priv  = await db.get('SELECT (priv) FROM Users WHERE (? = username);',req.cookies.user)
     const course = req.body;
-    console.log(course)
+    res.cookie('course',Object.values(course).toString())
     const Courses = await db.all('SELECT DISTINCT name FROM Grades INNER JOIN Users INNER JOIN Courses WHERE Users.u_id = Grades.u_id AND Courses.c_id = Grades.c_id AND username = ?;',req.cookies.user)
     if(priv.priv == 'teacher'){
         var Grades = await db.all("SELECT *,((grade1 + grade2 + grade3)/3) AS avg FROM Users INNER JOIN Grades INNER JOIN Courses WHERE Users.u_id = Grades.u_id AND Courses.c_id = Grades.c_id AND name = ? AND teacherName = ?;",Object.values(course).toString(),req.cookies.user)
@@ -120,35 +121,32 @@ app.post('/course',cookieVal, async (req,res) => {
     }
 })
 
-// Useless for now Keven doing tests
-// app.get('/course', cookieVal, async (req,res) => {
-//     const db = await dbPromise
-//     const priv  = await db.get('SELECT (priv) FROM Users WHERE (? = username);',req.cookies.user)
-//     // const course = req.body;
-//     const course = "SOEN 287"
-//     const Courses = await db.all('SELECT DISTINCT name FROM Grades INNER JOIN Users INNER JOIN Courses WHERE Users.u_id = Grades.u_id AND Courses.c_id = Grades.c_id AND username = ?;',req.cookies.user)
-//     // if(priv.priv == 'student'){
-//     //     var Grades = await db.all("SELECT *,((grade1 + grade2 + grade3)/3) AS avg FROM Users INNER JOIN Grades INNER JOIN Courses WHERE Users.u_id = Grades.u_id AND Courses.c_id = Grades.c_id AND name = ? AND username = ?;",Object.values(course).toString(),req.cookies.user)
-//     //     res.render('log', {
-//     //         Courses,
-//     //         Grades,
-//     //         PageTitle: Object.values(course).toString() + ' - Management++',
-//     //         style: 'log.css',
-//     //         js: 'log.js'
-//     //     })
-//     // }
-//     // else{
-//         var Grades = await db.all("SELECT *,((grade1 + grade2 + grade3)/3) AS avg FROM Users INNER JOIN Grades INNER JOIN Courses WHERE Users.u_id = Grades.u_id AND Courses.c_id = Grades.c_id AND name = ? AND teacherName = ?;",Object.values(course).toString(),req.cookies.user)
-//         res.render('logTeach', {
-//             Courses,
-//             Grades,
-//             PageTitle: Object.values(course).toString() + ' - Management++',
-//             style: 'log.css',
-//             js: 'log.js'
-//         })
-//         console.log('bob' + course)
-//     // }
-// })
+app.get('/course', cookieVal, async (req,res) => {
+    const db = await dbPromise
+    const priv  = await db.get('SELECT (priv) FROM Users WHERE (? = username);',req.cookies.user)
+    const course = req.cookies.course
+    const Courses = await db.all('SELECT DISTINCT name FROM Grades INNER JOIN Users INNER JOIN Courses WHERE Users.u_id = Grades.u_id AND Courses.c_id = Grades.c_id AND username = ?;',req.cookies.user)
+    if(priv.priv == 'student'){
+        var Grades = await db.all("SELECT *,((grade1 + grade2 + grade3)/3) AS avg FROM Users INNER JOIN Grades INNER JOIN Courses WHERE Users.u_id = Grades.u_id AND Courses.c_id = Grades.c_id AND name = ? AND username = ?;",course,req.cookies.user)
+        res.render('log', {
+            Courses,
+            Grades,
+            PageTitle: course + ' - Management++',
+            style: 'log.css',
+            js: 'log.js'
+        })
+    }
+    else{
+        var Grades = await db.all("SELECT *,((grade1 + grade2 + grade3)/3) AS avg FROM Users INNER JOIN Grades INNER JOIN Courses WHERE Users.u_id = Grades.u_id AND Courses.c_id = Grades.c_id AND name = ? AND teacherName = ?;",course,req.cookies.user)
+        res.render('logTeach', {
+            Courses,
+            Grades,
+            PageTitle: course + ' - Management++',
+            style: 'log.css',
+            js: 'log.js'
+        })
+    }
+})
 
 //route to log for home button
 app.post('/log', (req,res) => {
@@ -167,13 +165,12 @@ app.post('/editGrades', (req,res) => {
 //route to removeStudent for when teacher is logged in
 app.post('/removeStudent',cookieVal, async (req,res) => {
     const db = await dbPromise
-    let keys = Object.keys(req.body);
-    let keys2 = Object.keys(req.body[keys[0]])
-    const values = req.body[keys[0]]
-    const u_id = values[keys2[0]]
-    const c_id = values[keys2[1]]
+    let keys = Object.keys(req.body)
+    const u_id = req.body[keys[0]]
+    const c_id = req.body[keys[1]]
     db.run('DELETE FROM GRADES where u_id= ? AND c_id = ?', u_id, c_id)
     // TODO refresh the course page with the student removed
+    res.redirect('course')
 })
 
 //simply check current user and priv with cookies

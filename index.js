@@ -162,6 +162,22 @@ app.post('/logTeach', (req,res) => {
 app.post('/editGrades', (req,res) => {
     // TODO
 })
+//route to addStudent for when teacher is logged in
+app.post('/addStudent', (req,res) => {
+    console.log(req.body)
+    res.redirect('addStudent')
+})
+app.get('/addStudent', async (req,res) => {
+    const db = await dbPromise
+    const c_id = await db.get("SELECT c_id FROM Courses WHERE name = ?;", req.cookies.course)
+    console.log(Object.values(c_id).toString())
+    var StudentNotInClass = await db.all("SELECT Users.u_id,Users.username FROM Users WHERE Users.u_id NOT IN(SELECT Users.u_id FROM Users,Grades WHERE Users.u_id = Grades.u_id AND Users.priv ='student') AND priv = 'student' UNION SELECT Users.u_id,Users.username FROM Users,Grades WHERE Users.u_id = Grades.u_id AND Users.priv ='student' AND Grades.c_id != ?;", c_id)
+    res.render('addStudent', {
+        StudentNotInClass,
+        style: 'log.css',
+        js: 'log.js'
+    })
+})
 //route to removeStudent for when teacher is logged in
 app.post('/removeStudent',cookieVal, async (req,res) => {
     const db = await dbPromise

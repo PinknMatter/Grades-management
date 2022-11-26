@@ -1,0 +1,43 @@
+<div class="topnav">
+  <div class="topnav-centered">
+    <form action="/logTeach" method="post">
+      <button type="text" id="home">Home</button>
+    </form>
+  </div>
+
+  <div id="logout">
+    <form action="/" method="post">
+      <button id="logout-button" type="text">Logout</button>
+    </form>
+  </div>
+  <a onclick="history.back()">Back</a>
+</div>
+
+<div class="menu" id="menu" onclick="">
+  <button id="bclose" onclick="side_open()">></button>
+</div>
+
+<div class="Gradetable">
+  <div class="main">
+    <table>
+      <tr>
+        <th>STUDENT</th>
+        <th>Add to class?</th>
+      </tr>
+      <form id="addStudentForm" action="/addStudent" method="post"></form>
+      {{#each StudentNotInClass}}
+      <tr>
+        <td>{{username}}</td>
+        <td>
+          <input form"addStudentForm" type="checkbox" name="editGrades" value="{{u_id}}"</input>
+        </td>
+      </tr>
+      {{/each}}
+      </form>
+    </table>
+  </div>
+</div>
+
+<div class="EditOptions">
+    <button id="editGrades-button" type="text" form="addStudentForm">Save</button>
+</div>

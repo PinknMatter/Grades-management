@@ -18,34 +18,22 @@
     <table>
       <tr>
         <th>STUDENT</th>
-        <th colspan="2">ASSIGNMENT 1</th>
-        <th colspan="2">ASSIGNMENT 2</th>
-        <th colspan="2">FINAL EXAM</th>
-      </tr>
-      <tr>
-        <th></th>
-        <th>Current</th>
-        <th>New</th>
-        <th>Current</th>
-        <th>New</th>
-        <th>Current</th>
-        <th>New</th>
+        <th>ASSIGNMENT 1</th>
+        <th>ASSIGNMENT 2</th>
+        <th>FINAL EXAM</th>
       </tr>
       <form id="editGradesForm" action="/editGrades" method="post">
       {{#each StudentInClass}}
       <tr>
-        <td>{{u_id}}</td>
-        <td>{{grade1}}</td>
+        <td>{{username}}</td>
         <td>
-          <input form="editGradesForm" type="text" name="editGrade{{u_id}}"</input>
+          <input form="editGradesForm" type="text" name="editGrade{{u_id}}" value={{grade1}}></input>
         </td>
-        <td>{{grade2}}</td>
         <td>
-          <input form="editGradesForm" type="text" name="editGrade{{u_id}}"</input>
+          <input form="editGradesForm" type="text" name="editGrade{{u_id}}" value={{grade2}}></input>
         </td>
-        <td>{{grade3}}</td>
         <td>
-          <input form="editGradesForm" type="text" name="editGrade{{u_id}}"</input>
+          <input form="editGradesForm" type="text" name="editGrade{{u_id}}" value={{grade3}}></input>
         </td>
       </tr>
       <input form="editGradesForm" type="hidden" name="editGrade{{u_id}}" value="{{u_id}}"></input>

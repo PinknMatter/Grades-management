@@ -164,16 +164,20 @@ app.post('/editGrades', async (req,res) => {
     console.log(req.body)
     let keys = Object.keys(req.body)
     const c_id = await db.get("SELECT c_id FROM Courses WHERE name = ?;", req.cookies.course)
-    // for (let i=0; i<keys.length; i++){
-    //     await db.run("INSERT INTO Grades (u_id, c_id, teacherName) VALUES (?,?,?);", req.body[keys[i]], Object.values(c_id).toString(), req.cookies.user)
-    // }
-    res.redirect('editGrades')
+    for (let i=0; i<keys.length; i++){
+        let g1 = req.body[keys[i]][0]
+        let g2 = req.body[keys[i]][1]
+        let g3 = req.body[keys[i]][2]
+        let u_id = req.body[keys[i]][3]
+        await db.run("UPDATE Grades SET grade1 = ?, grade2 = ?, grade3= ? WHERE u_id = ? AND c_id=?",g1,g2,g3,u_id,Object.values(c_id).toString())
+    }
+    res.redirect('course')
 })
 //route to gradesManagement for when teacher is logged in
 app.get('/editGrades', async (req,res) => {
     const db = await dbPromise
     const c_id = await db.get("SELECT c_id FROM Courses WHERE name = ?;", req.cookies.course)
-    var StudentInClass = await db.all("SELECT * FROM Grades WHERE c_id = ? AND teacherName IS NOT NULL",Object.values(c_id).toString())
+    var StudentInClass = await db.all("SELECT * FROM Grades,Courses,Users WHERE Courses.c_id = Grades.c_id AND Grades.u_id = Users.u_id AND priv = 'student' AND Grades.c_id = ? AND teacherName IS NOT NULL",Object.values(c_id).toString())
     res.render('editGrades', {
         StudentInClass,
         style: 'log.css',
@@ -188,7 +192,7 @@ app.post('/addStudent', async (req,res) => {
     for (let i=0; i<keys.length; i++){
         await db.run("INSERT INTO Grades (u_id, c_id, teacherName) VALUES (?,?,?);", req.body[keys[i]], Object.values(c_id).toString(), req.cookies.user)
     }
-    res.redirect('addStudent')
+    res.redirect('course')
 })
 app.get('/addStudent', async (req,res) => {
     const db = await dbPromise

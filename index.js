@@ -159,8 +159,26 @@ app.post('/logTeach', (req,res) => {
 })
 
 //route to gradesManagement for when teacher is logged in
-app.post('/editGrades', (req,res) => {
-    // TODO
+app.post('/editGrades', async (req,res) => {
+    const db = await dbPromise
+    console.log(req.body)
+    let keys = Object.keys(req.body)
+    const c_id = await db.get("SELECT c_id FROM Courses WHERE name = ?;", req.cookies.course)
+    // for (let i=0; i<keys.length; i++){
+    //     await db.run("INSERT INTO Grades (u_id, c_id, teacherName) VALUES (?,?,?);", req.body[keys[i]], Object.values(c_id).toString(), req.cookies.user)
+    // }
+    res.redirect('editGrades')
+})
+//route to gradesManagement for when teacher is logged in
+app.get('/editGrades', async (req,res) => {
+    const db = await dbPromise
+    const c_id = await db.get("SELECT c_id FROM Courses WHERE name = ?;", req.cookies.course)
+    var StudentInClass = await db.all("SELECT * FROM Grades WHERE c_id = ? AND teacherName IS NOT NULL",Object.values(c_id).toString())
+    res.render('editGrades', {
+        StudentInClass,
+        style: 'log.css',
+        js: 'log.js'
+    })
 })
 //route to addStudent for when teacher is logged in
 app.post('/addStudent', async (req,res) => {
@@ -192,14 +210,12 @@ app.post('/removeStudent',cookieVal, async (req,res) => {
     // TODO refresh the course page with the student removed
     res.redirect('course')
 })
-
 //simply check current user and priv with cookies
 function cookieVal(req,res,next){
     const { cookies } = req
     console.log(cookies)
     next()
 }
-
 /*redirect to log*/ 
 app.get('/logTeach',cookieVal, async (req,res) => {
     const db =  await dbPromise;
@@ -211,7 +227,6 @@ app.get('/logTeach',cookieVal, async (req,res) => {
         js: 'log.js'
     })
 })
-
 /*redirect to logTeach*/ 
 app.get('/log',cookieVal, async (req,res) => {
     const db =  await dbPromise;
@@ -223,34 +238,23 @@ app.get('/log',cookieVal, async (req,res) => {
         js: 'log.js'
     })
 })
-
 //Graph begin
 app.get("/", function(req,res){
     res.sendFile(__dirname + "/chart.png");
   
  });
-
-
 var lcs = require('line-chart-simple');
-
-
-
 var xvalues = ["A","B","C","D","E","F","G","H","I","J","K"]; //list of x cordinate student names
 var project_test = xvalues.map(function(x){return Math.random()*100;}); // Test/project average values
 var midterm = xvalues.map(function(x){return Math.random()*100;}); // mid term exam
 var final_exam = xvalues.map(function(x){return Math.random()*100;}); // Final term final exam
 var final_total = xvalues.map(function(x){return Math.random()*100;}); // Total average
-
-
 var classPerfomance = {
     Project_Average: project_test,
     Mid_term: midterm,
     Final_Exam: final_exam,
     Total_average: final_total,
-
 }
-
-
 // colours for topics
 classPerfomance.Project_Average.color='rgb(255, 0, 0)';
 classPerfomance.Mid_term.color='rgb(0, 225, 0)';
@@ -260,16 +264,14 @@ classPerfomance.Total_average.color='rgb(0, 0, 0)';
 var dots = { //put colored dots at specified indices
     'rgb(255, 0, 0)': [1,2,3],
     'rgb(0, 0, 255)': [4,5,6],
-    'rgb(0, 255, 0)': [7,8,9],
-    
+    'rgb(0, 255, 0)': [7,8,9], 
 };
-
 var width = 1000;
 var height = 800;
 var bgColor = 'white';
 lcs.plotSimpleChart("chart.png", xvalues, classPerfomance ,dots, width  , height, bgColor);
-
 // Graph ends
+
 //==============
 const setup = async() => {
     const db = await dbPromise

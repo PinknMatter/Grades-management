@@ -10,58 +10,51 @@
       <button id="logout-button" type="text">logout</button>
     </form>
   </div>
-  {{!-- <div id="editGrades">
-    <form action="/gradesManagement" method="post">
-      <button id="editGrades-button" type="text">Edit grades</button>
-    </form>
-  </div> --}}
   <a onclick="history.back()">Back</a>
 </div>
 
-<div class="sidebar" id="mySidebar">
-  <button onclick="side_close()" class="side_button"> < </button>
-      <h1>Courses</h1>
-      <form action="/course" method="post">
-        {{#each Courses}}
-        <button id="a-button" name="button" type="submit" class="button" value="{{this.name}}">{{this.name}}</button>
-        {{/each}}
-      </form>
-</div>
-
-<div class="menu" id="menu" onclick="">
-  <button id="bclose" onclick="side_open()">></button>
-</div>
-<div class="EditOptions">
-  <form action="/gradesManagement" method="post">
-    <button id="editGrades-button" type="text">Add Student</button>
-  </form>
-  <form action="/gradesManagement" method="post">
-    <button id="editGrades-button" type="text">Add Assignment</button>
-  </form>
-</div>
 <div class="Gradetable">
   <div class="main">
     <table>
       <tr>
         <th>STUDENT</th>
-        <th>ASSIGNMENT 1</th>
-        <th>ASSIGNMENT 2</th>
-        <th>FINAL EXAM</th>
-        <th>AVERAGE</th>
+        <th colspan="2">ASSIGNMENT 1</th>
+        <th colspan="2">ASSIGNMENT 2</th>
+        <th colspan="2">FINAL EXAM</th>
       </tr>
-      {{#each Grades}}
       <tr>
-        <td>{{this.username}}</td>
-        <td>{{this.grade1}}</td>
-        <td>{{this.grade2}}</td>
-        <td>{{this.grade3}}</td>
-        <td>{{this.avg}}</td>
-        <td><form action="/editGrades#{{this.u_id}}" method="post">
-              <button id="editGrades" value="{{this.u_id}}">Submit</button>
-            </form>
+        <th></th>
+        <th>Current</th>
+        <th>New</th>
+        <th>Current</th>
+        <th>New</th>
+        <th>Current</th>
+        <th>New</th>
+      </tr>
+      <form id="editGradesForm" action="/editGrades" method="post">
+      {{#each StudentInClass}}
+      <tr>
+        <td>{{u_id}}</td>
+        <td>{{grade1}}</td>
+        <td>
+          <input form="editGradesForm" type="text" name="editGrade{{u_id}}"</input>
+        </td>
+        <td>{{grade2}}</td>
+        <td>
+          <input form="editGradesForm" type="text" name="editGrade{{u_id}}"</input>
+        </td>
+        <td>{{grade3}}</td>
+        <td>
+          <input form="editGradesForm" type="text" name="editGrade{{u_id}}"</input>
         </td>
       </tr>
+      <input form="editGradesForm" type="hidden" name="editGrade{{u_id}}" value="{{u_id}}"></input>
       {{/each}}
+      </form>
     </table>
   </div>
+</div>
+
+<div class="EditOptions">
+    <button id="editGrades-button" type="text" form="editGradesForm">Save</button>
 </div>

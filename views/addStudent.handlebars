@@ -24,12 +24,12 @@
         <th>STUDENT</th>
         <th>Add to class?</th>
       </tr>
-      <form id="addStudentForm" action="/addStudent" method="post"></form>
+      <form id="addStudentForm" action="/addStudent" method="post">
       {{#each StudentNotInClass}}
       <tr>
         <td>{{username}}</td>
         <td>
-          <input form"addStudentForm" type="checkbox" name="editGrades" value="{{u_id}}"</input>
+          <input form="addStudentForm" type="checkbox" name="addStudentID{{u_id}}" value="{{u_id}}"</input>
         </td>
       </tr>
       {{/each}}

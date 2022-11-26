@@ -28,10 +28,13 @@
 </div>
 <div class="EditOptions">
   <form action="/addStudent" method="post">
-    <button id="editGrades-button" type="text">Add Student</button>
+    <button id="editGrades-button" type="post">Add Students</button>
   </form>
   <form action="/gradesManagement" method="post">
     <button id="editGrades-button" type="text">Add Assignment</button>
+  </form>
+  <form action="/editGrades" method="post">
+    <button id="editGrades-button" type="text">Edit Grades</button>
   </form>
 </div>
 <div class="Gradetable">
@@ -51,11 +54,6 @@
         <td>{{grade2}}</td>
         <td>{{grade3}}</td>
         <td>{{avg}}</td>
-        <td><form action="/editGrades" method="post">
-              <button id="editGrades" value="{{u_id}}">Edit</button>
-              <input name = "editGrades" type="hidden" value=""</input>
-            </form>
-        </td>
         <td>
           <form action="/removeStudent" method="post">
               <button id="removeStudent" name="u_id" type="submit" value="{{u_id}}">Remove Student</button>

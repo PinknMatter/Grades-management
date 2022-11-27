@@ -1,0 +1,41 @@
+<div class="topnav">
+  <div class="topnav-centered">
+    <form action="/log" method="post">
+      <button type="text" id="home">Home</button>
+    </form>
+  </div>
+
+  <div id="logout">
+    <form action="/" method="post">
+      <button id="logout-button" type="text">Logout</button>
+    </form>
+  </div>
+  <a onclick="history.back()">Back</a>
+</div>
+
+<div class="Gradetable">
+  <div class="main">
+    <table>
+      <tr>
+        <th>Course</th>
+        <th>Teacher Name</th>
+        <th>Register to Course?</th>
+      </tr>
+      <form id="addCourseForm" action="/addCourse" method="post">
+      {{#each StudentNotInCourse}}
+      <tr>
+        <td>{{name}}</td>
+        <td>{{username}}</td>
+        <td>
+          <input form="addCourseForm" type="checkbox" name="AddCourseID {{c_id}}" value="{{c_id}},{{username}}"</input>
+        </td>
+      </tr>
+      {{/each}}
+      </form>
+    </table>
+  </div>
+</div>
+
+<div class="EditOptions">
+    <button id="addCourse-button" type="text" form="addCourseForm">Save</button>
+</div>

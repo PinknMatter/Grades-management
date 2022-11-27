@@ -177,7 +177,7 @@ app.post('/editGrades', async (req,res) => {
 app.get('/editGrades', async (req,res) => {
     const db = await dbPromise
     const c_id = await db.get("SELECT c_id FROM Courses WHERE name = ?;", req.cookies.course)
-    var StudentInClass = await db.all("SELECT * FROM Grades,Courses,Users WHERE Courses.c_id = Grades.c_id AND Grades.u_id = Users.u_id AND priv = 'student' AND Grades.c_id = ? AND teacherName IS NOT NULL",Object.values(c_id).toString())
+    let StudentInClass = await db.all("SELECT * FROM Grades,Courses,Users WHERE Courses.c_id = Grades.c_id AND Grades.u_id = Users.u_id AND priv = 'student' AND Grades.c_id = ? AND teacherName IS NOT NULL",Object.values(c_id).toString())
     res.render('editGrades', {
         StudentInClass,
         style: 'log.css',
@@ -204,6 +204,38 @@ app.get('/addStudent', async (req,res) => {
         js: 'log.js'
     })
 })
+
+app.post('/addCourse',async (req,res) => {
+    let counter = 0
+    const db = await dbPromise
+    const u_id = await db.get("SELECT u_id FROM Users WHERE username = ?;",req.cookies.user)
+    let keys = Object.values(req.body)
+    let keysArr = keys.toString().split(',')
+    // console.log(Object.values(u_id).toString())
+    if(keys.length > 1)
+        counter = keys.length + 1
+    else
+        counter = keys.length
+    
+    for (let i=0; i<=counter ; i+=2){
+        // console.log(keysArr[i])
+        // console.log(keysArr[(i + 1)])
+        await db.run("INSERT INTO Grades (u_id, c_id, teacherName) VALUES (?,?,?);",Object.values(u_id).toString(), keysArr[i],keysArr[(i + 1)] )
+    }
+    res.redirect('course')
+})
+
+app.get('/addCourse',async (req,res) => {
+    const db = await dbPromise;
+    const StudentNotInCourse = await db.all("SELECT * FROM Users,courses,Grades WHERE name NOT IN (SELECT name FROM Users,Grades,Courses WHERE Users.u_id = Grades.u_id AND Grades.c_id = Courses.c_id AND priv = 'student' AND username = ?)  AND teacherName IS NULL AND Courses.c_id = Grades.c_id AND priv = 'teacher';",req.cookies.user)
+    //console.log(StudentNotInCourse)
+    res.render('addCourse',{
+        StudentNotInCourse,
+        style: 'log.css',
+        js: 'log.js'
+    })
+})
+
 //route to removeStudent for when teacher is logged in
 app.post('/removeStudent',cookieVal, async (req,res) => {
     const db = await dbPromise

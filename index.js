@@ -4,7 +4,7 @@ import { engine } from 'express-handlebars';
 import sqlite3 from 'sqlite3'
 import { open } from 'sqlite'
 import cookieParser from 'cookie-parser';
-
+import session from 'express-session';
 const dbPromise = open({
     filename: 'data.db',
     driver: sqlite3.Database
@@ -18,9 +18,16 @@ app.set('view engine', 'handlebars')
 
 app.use(express.urlencoded())
 app.use(express.static('public'))
-app.use(cookieParser())
-
-
+app.use(cookieParser('secret'))
+app.use(session({
+    cookie:{maxAge:null}
+}))
+//flash message middleware
+app.use((req, res, next)=>{
+    res.locals.message = req.session.message
+    delete req.session.message
+    next()
+})
 /*render login and redirect to login*/ 
 app.get('/home', async (req,res) =>{
     res.render('home',{
@@ -160,29 +167,42 @@ app.post('/logTeach', (req,res) => {
 
 //route to gradesManagement for when teacher is logged in
 app.post('/editGrades', async (req,res) => {
+    
     const db = await dbPromise
     console.log(req.body)
     let keys = Object.keys(req.body)
     const c_id = await db.get("SELECT c_id FROM Courses WHERE name = ?;", req.cookies.course)
     for (let i=0; i<keys.length; i++){
-        let g1 = req.body[keys[i]][0]
-        let g2 = req.body[keys[i]][1]
-        let g3 = req.body[keys[i]][2]
+        let g1 = parseInt(req.body[keys[i]][0])
+        let g2 = parseInt(req.body[keys[i]][1])
+        let g3 = parseInt(req.body[keys[i]][2])
         let u_id = req.body[keys[i]][3]
-        await db.run("UPDATE Grades SET grade1 = ?, grade2 = ?, grade3= ? WHERE u_id = ? AND c_id=?",g1,g2,g3,u_id,Object.values(c_id).toString())
+        if(!Number.isInteger(parseInt(g1))&&g1==!null||!Number.isInteger(parseInt(g2))&&g2==!null||!Number.isInteger(parseInt(g3))&&g3==!null||g1>100||g1<0||g2>100||g2<0||g3>100||g3<0){
+            req.session.message={type:'danger', intro:'Error!',message:'Please enter a valid number between 0 and 100.'}
+            res.redirect('editGrades');
+            return;
+        } else {
+            await db.run("UPDATE Grades SET grade1 = ?, grade2 = ?, grade3= ? WHERE u_id = ? AND c_id=?",g1,g2,g3,u_id,Object.values(c_id).toString())
+        }
     }
+    
     res.redirect('course')
 })
 //route to gradesManagement for when teacher is logged in
 app.get('/editGrades', async (req,res) => {
-    const db = await dbPromise
-    const c_id = await db.get("SELECT c_id FROM Courses WHERE name = ?;", req.cookies.course)
-    let StudentInClass = await db.all("SELECT * FROM Grades,Courses,Users WHERE Courses.c_id = Grades.c_id AND Grades.u_id = Users.u_id AND priv = 'student' AND Grades.c_id = ? AND teacherName IS NOT NULL",Object.values(c_id).toString())
-    res.render('editGrades', {
-        StudentInClass,
-        style: 'log.css',
-        js: 'log.js'
-    })
+    if(req.cookies.course == null){
+        req.session.message={type:'danger', intro:'Error!',message:'Please select the course you want to add a student to.'}
+        res.redirect('logTeach');
+    } else {
+        const db = await dbPromise
+        const c_id = await db.get("SELECT c_id FROM Courses WHERE name = ?;", req.cookies.course)
+        let StudentInClass = await db.all("SELECT * FROM Grades,Courses,Users WHERE Courses.c_id = Grades.c_id AND Grades.u_id = Users.u_id AND priv = 'student' AND Grades.c_id = ? AND teacherName IS NOT NULL",Object.values(c_id).toString())
+        res.render('editGrades', {
+            StudentInClass,
+            style: 'log.css',
+            js: 'log.js'
+        })
+    }
 })
 //route to addStudent for when teacher is logged in
 app.post('/addStudent', async (req,res) => {
@@ -195,14 +215,19 @@ app.post('/addStudent', async (req,res) => {
     res.redirect('course')
 })
 app.get('/addStudent', async (req,res) => {
-    const db = await dbPromise
-    const c_id = await db.get("SELECT c_id FROM Courses WHERE name = ?;", req.cookies.course)
-    var StudentNotInClass = await db.all("SELECT Users.u_id,Users.username FROM Users WHERE Users.u_id NOT IN(SELECT Users.u_id FROM Users,Grades WHERE Users.u_id = Grades.u_id AND Users.priv ='student' AND Grades.c_id = ?) AND priv = 'student';", Object.values(c_id).toString())
-    res.render('addStudent', {
-        StudentNotInClass,
-        style: 'log.css',
-        js: 'log.js'
-    })
+    if(req.cookies.course == null){
+        req.session.message={type:'danger', intro:'Error!',message:'Please select the course you want to add a student to.'}
+        res.redirect('logTeach');
+    } else {
+        const db = await dbPromise
+        const c_id = await db.get("SELECT c_id FROM Courses WHERE name = ?;", req.cookies.course)
+        var StudentNotInClass = await db.all("SELECT Users.u_id,Users.username FROM Users WHERE Users.u_id NOT IN(SELECT Users.u_id FROM Users,Grades WHERE Users.u_id = Grades.u_id AND Users.priv ='student' AND Grades.c_id = ?) AND priv = 'student';", Object.values(c_id).toString())
+        res.render('addStudent', {
+            StudentNotInClass,
+            style: 'log.css',
+            js: 'log.js'
+        })
+    }
 })
 
 app.post('/registerToCourse',async (req,res) => {

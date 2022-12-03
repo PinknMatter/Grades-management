@@ -154,13 +154,13 @@ table {
 #editGrades-button:hover {
     cursor: pointer;
 }
-#addCourse-button {
+#registerToCourse-button {
     color: #000000;
     /* position: relative; */
     display: inline;
     font-size: 24px;
     text-align: right;
 }
-#addCourse-button:hover {
+#registerToCourse-button:hover {
     cursor: pointer;
 }

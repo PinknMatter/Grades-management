@@ -21,13 +21,13 @@
         <th>Teacher Name</th>
         <th>Register to Course?</th>
       </tr>
-      <form id="addCourseForm" action="/addCourse" method="post">
+      <form id="registerToCourseForm" action="/registerToCourse" method="post">
       {{#each StudentNotInCourse}}
       <tr>
         <td>{{name}}</td>
         <td>{{username}}</td>
         <td>
-          <input form="addCourseForm" type="checkbox" name="AddCourseID {{c_id}}" value="{{c_id}},{{username}}"</input>
+          <input form="registerToCourseForm" type="checkbox" name="registerToCourseID {{c_id}}" value="{{c_id}},{{username}}"</input>
         </td>
       </tr>
       {{/each}}
@@ -37,5 +37,5 @@
 </div>
 
 <div class="EditOptions">
-    <button id="addCourse-button" type="text" form="addCourseForm">Save</button>
+    <button id="registerToCourse-button" type="text" form="registerToCourseForm">Save</button>
 </div>

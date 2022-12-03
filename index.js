@@ -205,7 +205,7 @@ app.get('/addStudent', async (req,res) => {
     })
 })
 
-app.post('/addCourse',async (req,res) => {
+app.post('/registerToCourse',async (req,res) => {
     let counter = 0
     const db = await dbPromise
     const u_id = await db.get("SELECT u_id FROM Users WHERE username = ?;",req.cookies.user)
@@ -225,11 +225,11 @@ app.post('/addCourse',async (req,res) => {
     res.redirect('course')
 })
 
-app.get('/addCourse',async (req,res) => {
+app.get('/registerToCourse',async (req,res) => {
     const db = await dbPromise;
     const StudentNotInCourse = await db.all("SELECT * FROM Users,courses,Grades WHERE name NOT IN (SELECT name FROM Users,Grades,Courses WHERE Users.u_id = Grades.u_id AND Grades.c_id = Courses.c_id AND priv = 'student' AND username = ?)  AND teacherName IS NULL AND Courses.c_id = Grades.c_id AND priv = 'teacher';",req.cookies.user)
     //console.log(StudentNotInCourse)
-    res.render('addCourse',{
+    res.render('registerToCourse',{
         StudentNotInCourse,
         style: 'log.css',
         js: 'log.js'
